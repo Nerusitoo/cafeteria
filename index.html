@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafetería Lissolett - Tarot, Café & Experiencias Únicas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #3d1e47;
+            background: linear-gradient(135deg, #c598af, #e8c6d4);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #653289, #7f4aa4);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cat-icon {
+            font-size: 3rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .info-banner {
+            background: rgba(127, 74, 164, 0.9);
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(101, 50, 137, 0.95);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            background: rgba(251, 184, 15, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        main {
+            padding: 3rem 0;
+        }
+
+        .section {
+            background: rgba(255,255,255,0.95);
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(101, 50, 137, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(197, 152, 175, 0.3);
+        }
+
+        .section h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+            color: #653289;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '🐾';
+            position: absolute;
+            right: -30px;
+            top: 0;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-item {
+            background: linear-gradient(135deg, #f8f6fa, #f0ebf4);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid #c598af;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .service-item::before {
+            content: '🔮';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            opacity: 0.6;
+            color: #7f4aa4;
+        }
+
+        .service-item:nth-child(2)::before { content: '🃏'; }
+        .service-item:nth-child(3)::before { content: '👋'; }
+        .service-item:nth-child(4)::before { content: '🌟'; }
+        .service-item:nth-child(5)::before { content: '✨'; }
+        .service-item:nth-child(6)::before { content: '📚'; }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(101, 50, 137, 0.2);
+            border-color: #653289;
+        }
+
+        .service-item h3 {
+            color: #653289;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .service-item p {
+            margin-bottom: 1rem;
+            color: #7f4aa4;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #fbb80f;
+            font-size: 1.3rem;
+            background: rgba(251, 184, 15, 0.15);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            display: inline-block;
+            border: 2px solid #fbb80f;
+        }
+
+        /* Menu Grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .menu-item {
+            background: linear-gradient(135deg, #faf8fb, #f5f0f7);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 2px solid #c598af;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .menu-item::before {
+            content: '☕';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            opacity: 0.7;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(101, 50, 137, 0.15);
+            border-color: #7f4aa4;
+        }
+
+        .menu-item h3 {
+            color: #653289;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .menu-item p {
+            color: #7f4aa4;
+        }
+
+        .menu-price {
+            font-weight: bold;
+            color: #fbee0f;
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+            background: rgba(251, 238, 15, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            display: inline-block;
+        }
+
+        /* Info Cards */
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #653289, #7f4aa4);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(101, 50, 137, 0.3);
+        }
+
+        .info-card[style*="cursor"] {
+            transition: all 0.3s ease;
+        }
+
+        .info-card[style*="cursor"]:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(101, 50, 137, 0.4);
+            background: linear-gradient(135deg, #7f4aa4, #8f5ab4);
+        }
+
+        .info-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #fbee0f;
+        }
+
+        .info-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            color: #fbee0f;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #25d366, #20b358);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            margin: 1rem;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-icon {
+            font-size: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #653289;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+
+            .services-grid,
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                margin: 1rem 0;
+                padding: 1.5rem;
+            }
+
+            .section h2::after {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .section h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Additional mystical effects */
+        .service-item:hover::before {
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Sparkle effect for prices */
+        .price:hover {
+            background: rgba(251, 184, 15, 0.3);
+            box-shadow: 0 0 15px rgba(251, 184, 15, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="cat-icon">🐱</div>
+                <div>
+                    <h1>Cafetería Lissolett</h1>
+                    <p class="subtitle">Tarot, Café y Experiencias Únicas</p>
+                    <div class="info-banner">
+                        📍 Merced #346 | 🕐 Martes a Domingo 14:00 - 22:00 hrs
+                    </div>
+                </div>
+                <div class="cat-icon">🔮</div>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#info">Información</a></li>
+                <li><a href="#contact">Agendar</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <section id="servicios" class="section">
+                <h2>Nuestros Servicios Místicos</h2>
+                <div class="services-grid">
+                    <div class="service-item">
+                        <h3>Lectura de Tarot</h3>
+                        <p>Sesiones personalizadas de tarot con diferentes tipos de mazos. Descubre lo que las cartas tienen para revelarte sobre tu futuro, amor y decisiones importantes.</p>
+                        <div class="price">$8.000 - $15.000</div>
+                    </div>
+                    <div class="service-item">
+                        <h3>Lectura de Manos</h3>
+                        <p>Quiromancia profesional donde interpretamos las líneas de tus manos para revelar aspectos de tu personalidad, salud y destino.</p>
+                        <div class="price">$6.000 - $10.000</div>
+                    </div>
+                    <div class="service-item">
+                        <h3>Lectura de Té</h3>
+                        <p>Tasseografía tradicional donde interpretamos las formas que dejan las hojas de té en tu taza, revelando mensajes y predicciones.</p>
+                        <div class="price">$5.000 - $8.000</div>
+                    </div>
+                    <div class="service-item">
+                        <h3>Péndulo</h3>
+                        <p>Radiestesia con péndulo para obtener respuestas claras a preguntas específicas sobre diferentes aspectos de tu vida.</p>
+                        <div class="price">$4.000 - $7.000</div>
+                    </div>
+                    <div class="service-item">
+                        <h3>Limpia Energética</h3>
+                        <p>Sesión de limpieza energética para equilibrar tus chakras y eliminar energías negativas de tu aura personal.</p>
+                        <div class="price">$12.000 - $18.000</div>
+                    </div>
+                    <div class="service-item">
+                        <h3>Curso de Tarot</h3>
+                        <p>Aprende a leer las cartas del tarot en nuestros talleres grupales. Incluye material de estudio y práctica guiada.</p>
+                        <div class="price">$25.000 - $40.000</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="menu" class="section">
+                <h2>Menú de Cafetería</h2>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <h3>Café Místico</h3>
+                        <p>Espresso con leche de tu elección, canela y una pizca de magia.</p>
+                        <div class="menu-price">$3.500</div>
+                    </div>
+                    <div class="menu-item">
+                        <h3>Latte Luna Violeta</h3>
+                        <p>Latte con taro y leche de almendras, perfecto para la meditación.</p>
+                        <div class="menu-price">$4.200</div>
+                    </div>
+                    <div class="menu-item">
+                        <h3>Chai de las Brujas</h3>
+                        <p>Mezcla especial de especias con leche y miel, receta ancestral.</p>
+                        <div class="menu-price">$3.800</div>
+                    </div>
+                    <div class="menu-item">
+                        <h3>Chocolate Cósmico</h3>
+                        <p>Chocolate caliente artesanal con marshmallows y cacao orgánico.</p>
+                        <div class="menu-price">$4.000</div>
+                    </div>
+                    <div class="menu-item">
+                        <h3>Té de Hierbas Místicas</h3>
+                        <p>Selección de tés herbales para diferentes propósitos energéticos.</p>
+                        <div class="menu-price">$2.800</div>
+                    </div>
+                    <div class="menu-item">
+                        <h3>Torta Gatuna</h3>
+                        <p>Porción de torta artesanal del día, decorada con temática felina.</p>
+                        <div class="menu-price">$3.200</div>
+                    </div>
+                    <div class="menu-item">
+                        <h3>Sándwich Energético</h3>
+                        <p>Sándwich integral con ingredientes frescos y nutritivos.</p>
+                        <div class="menu-price">$4.500</div>
+                    </div>
+                    <div class="menu-item">
+                        <h3>Smoothie Chakra</h3>
+                        <p>Batido de frutas con superalimentos para equilibrar tu energía.</p>
+                        <div class="menu-price">$4.800</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="info" class="section">
+                <h2>Información Importante</h2>
+                <div class="info-cards">
+                    <div class="info-card">
+                        <div class="icon">🕐</div>
+                        <h3>Horarios</h3>
+                        <p><strong>Martes a Domingo</strong><br>14:00 - 22:00 hrs<br><br><strong>Cerrado los Lunes</strong></p>
+                    </div>
+                    <div class="info-card" id="locationCard" style="cursor: pointer;">
+                        <div class="icon">📍</div>
+                        <h3>Ubicación</h3>
+                        <p><strong>Merced #346</strong><br>Santiago Centro<br><br>Fácil acceso en metro<br>Línea 3 - Plaza de Armas</p>
+                        <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">🗺️ Toca para abrir en Google Maps</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="icon">📋</div>
+                        <h3>Reservas</h3>
+                        <p>Se recomienda agendar con anticipación para servicios místicos<br><br>Cafetería sin reserva</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="contact-section">
+                <div class="section">
+                    <h2>¡Agenda tu Experiencia!</h2>
+                    <p style="text-align: center; margin-bottom: 2rem; font-size: 1.2rem; color: #653289;">
+                        Reserva tu sesión de tarot, lectura de manos o simplemente ven a disfrutar de nuestro café en un ambiente único. 
+                        Nuestros expertos místicos y nuestros gatos te darán la bienvenida.
+                    </p>
+                    <a href="#" class="whatsapp-btn" id="whatsappBtn">
+                        <span class="whatsapp-icon">💬</span>
+                        Agendar por WhatsApp
+                    </a>
+                    <div style="margin-top: 2rem; color: #7f4aa4; font-style: italic;">
+                        <p>"También puedes venir directamente durante nuestros horarios de atención"</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Cafetería Lissolett - Merced #346, Santiago</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+                "Donde la sabiduría ancestral se encuentra con el presente" 🔮🐱
+            </p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+                Martes a Domingo | 14:00 - 22:00 hrs
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // WhatsApp button functionality
+        document.getElementById('whatsappBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Replace this phone number with the actual WhatsApp number
+            const phoneNumber = '56996714338'; // Format: country code + number (without +)
+            const message = 'Hola! Me gustaría agendar una sesión en Cafetería Lissolett. Estoy interesado/a en los servicios de tarot/lectura de manos/consulta. 🔮🐱';
+            
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        });
+
+        // Location card functionality - Opens Google Maps
+        document.getElementById('locationCard').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Address of Cafetería Lissolett
+            const address = 'Merced 346, Santiago, Chile';
+            const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+            
+            window.open(googleMapsUrl, '_blank');
+        });
+
+        // Add smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add stagger animation to service items
+            const serviceItems = document.querySelectorAll('.service-item');
+            serviceItems.forEach((item, index) => {
+                item.style.animationDelay = `${index * 0.1}s`;
+            });
+
+            // Add parallax effect on scroll
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const parallax = document.querySelector('header');
+                const speed = scrolled * 0.3;
+                parallax.style.transform = `translateY(${speed}px)`;
+            });
+
+            // Add hover effects to cards
+            const cards = document.querySelectorAll('.service-item, .menu-item, .info-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Random mystical tips in console
+            const tips = [
+                "🔮 Los gatos son conocidos por su conexión con el mundo espiritual",
+                "💜 La energía violeta ayuda a conectar con la intuición",
+                "🃏 Las cartas del tarot reflejan la energía del momento presente",
+                "👋 Las líneas de la mano cuentan la historia de tu alma",
+                "✨ El péndulo responde a la energía de tu subconsciente"
+            ];
+
+            setInterval(() => {
+                const randomTip = tips[Math.floor(Math.random() * tips.length)];
+                console.log(`Sabiduría Mística: ${randomTip}`);
+            }, 45000);
+        });
+
+        // Add current time display (optional)
+        function updateTime() {
+            const now = new Date();
+            const day = now.getDay();
+            const hour = now.getHours();
+            
+            // Check if café is open (Tuesday=2 to Sunday=0, 14:00-22:00)
+            const isOpen = (day >= 2 || day === 0) && hour >= 14 && hour < 22;
+            
+            const statusElement = document.querySelector('.info-banner');
+            if (statusElement && isOpen) {
+                statusElement.innerHTML += ' | <span style="color: #fbee0f;">🟢 ABIERTO AHORA</span>';
+            } else if (statusElement && !isOpen) {
+                statusElement.innerHTML += ' | <span style="color: #fbb80f;">🔴 CERRADO</span>';
+            }
+        }
+
+        // Call updateTime when page loads
+        setTimeout(updateTime, 1000);
+    </script>
+</body>
+</html>
